@@ -1,0 +1,7 @@
+.classpath
+.project
+.settings
+src/main/resources/webapp/WEB-INF/classes
+src/main/resources/webapp/WEB-INF/lib
+target
+
