@@ -159,7 +159,13 @@ public class GraphDBDAOImpl implements GraphDBDAO {
 
        User user = new User();
 
-       user.setId((String) endNode.getProperty(User.ID));
+       final String currentUserId = (String) endNode.getProperty(User.ID);
+
+       if (userId.equals(currentUserId)) {
+         continue;
+       }
+
+       user.setId(currentUserId);
        user.setFname((String) endNode.getProperty(User.FNAME));
        user.setLname((String) endNode.getProperty(User.LNAME));
 
