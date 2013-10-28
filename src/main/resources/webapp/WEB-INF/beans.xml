@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxws="http://cxf.apache.org/jaxws" xmlns:jaxrs="http://cxf.apache.org/jaxrs" xsi:schemaLocation="          http://www.springframework.org/schema/beans          http://www.springframework.org/schema/beans/spring-beans-2.0.xsd          http://cxf.apache.org/jaxws          http://cxf.apache.org/schemas/jaxws.xsd          http://cxf.apache.org/jaxrs          http://cxf.apache.org/schemas/jaxrs.xsd">
+
+  <bean id="graphDBDAO" class="com.israelekpo.strata.service.graph.dao.GraphDBDAOImpl" >
+    <property name="dbPath" value="/home/iekpo/Labs/neo4j-db"/>
+  </bean>
+
+  <bean id="graphDBService" class="com.israelekpo.strata.service.graph.service.GraphDBServiceImpl" scope="singleton">
+    <property name="graphDBDAO" ref="graphDBDAO" />
+  </bean>
+
+  <bean id="restService" class="com.israelekpo.strata.service.graph.webservice.GraphWebServiceImpl">
+     <property name="graphDBService" ref="graphDBService"/>
+  </bean>
+
+  <bean id="jacksonProvider" class="org.codehaus.jackson.jaxrs.JacksonJsonProvider"/>
+  <bean id="exceptionMapper" class="com.israelekpo.strata.service.graph.exception.GraphServiceExceptionMapper" />
+
+  <jaxrs:server id="graphService" address="/">
+    <jaxrs:serviceBeans>
+      <ref bean="restService"/>
+    </jaxrs:serviceBeans>
+    <jaxrs:providers>
+      <ref bean="jacksonProvider"/>
+      <ref bean="exceptionMapper"/>
+    </jaxrs:providers>
+    <jaxrs:extensionMappings>
+      <entry key="json" value="application/json"/>
+      <entry key="xml" value="application/xml"/>
+    </jaxrs:extensionMappings>
+    <jaxrs:languageMappings>
+      <entry key="en" value="en-gb"/>
+    </jaxrs:languageMappings>
+  </jaxrs:server>
+</beans>

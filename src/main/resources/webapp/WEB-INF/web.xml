@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee" version="2.4">
+  <display-name>Strata Conf Web Service</display-name>
+  <description>A REST Service used for Demonstration at Strata Conf + Hadoop World</description>
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>
+      classpath:META-INF/cxf/cxf.xml
+      classpath:META-INF/cxf/cxf-servlet.xml
+      WEB-INF/beans.xml
+     </param-value>
+  </context-param>
+  <servlet>
+    <servlet-name>CXFServlet</servlet-name>
+    <servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CXFServlet</servlet-name>
+    <url-pattern>/*</url-pattern>
+  </servlet-mapping>
+</web-app>

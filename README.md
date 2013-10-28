@@ -1,4 +1,2 @@
-graph-service
-=============
 
-Graph Service for Illustration at Strata Conf + Hadoop World
+export JAVA_HOME=/opt/java/64/jdk1.7.0_25

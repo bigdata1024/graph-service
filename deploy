@@ -1,0 +1,15 @@
+#!/bin/bash
+
+SOURCE_FILE="target/graph-service.war"
+OLD_TARGET="/usr/local/tomcat7/webapps/graph-service*"
+TOMCAT_WEB_APPS_FOLDER=/usr/local/tomcat7/webapps
+
+rm -fR $OLD_TARGET
+
+cp -p $SOURCE_FILE $TOMCAT_WEB_APPS_FOLDER
+
+rm -fR /usr/local/tomcat7/logs/*
+
+/etc/init.d/tomcat7 restart
+
+
