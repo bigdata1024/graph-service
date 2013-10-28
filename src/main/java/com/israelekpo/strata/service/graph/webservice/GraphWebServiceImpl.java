@@ -2,7 +2,7 @@ package com.israelekpo.strata.service.graph.webservice;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.List;
+import java.util.Map;
 
 import javax.ws.rs.core.Response;
 
@@ -76,7 +76,7 @@ public class GraphWebServiceImpl implements GraphWebService {
   @Override
   public Response getConnections(String userId) {
 
-    List<User> connections = this.graphDBService.getUserConnections(userId);
+    Map<String, User> connections = this.graphDBService.getUserConnections(userId);
 
     if (null == connections) {
       return Response.status(404).entity("No connections found for user " + userId).build();

@@ -1,6 +1,6 @@
 package com.israelekpo.strata.service.graph.service;
 
-import java.util.List;
+import java.util.Map;
 
 import com.israelekpo.strata.service.graph.dao.GraphDBDAO;
 import com.israelekpo.strata.service.graph.model.User;
@@ -33,7 +33,7 @@ public class GraphDBServiceImpl implements GraphDBService {
   }
 
   @Override
-  public List<User> getUserConnections(String userId) {
+  public Map<String, User> getUserConnections(String userId) {
       return this.graphDBDAO.getUserConnections(userId);
   }
 }

@@ -1,7 +1,7 @@
 package com.israelekpo.strata.service.graph.dao;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.neo4j.graphdb.Direction;
@@ -139,11 +139,11 @@ public class GraphDBDAOImpl implements GraphDBDAO {
     return returnStatus;
   }
 
-  public List<User> getUserConnections(final String userId) {
+  public Map <String, User> getUserConnections(final String userId) {
 
     Index<Node> usersIndex = this.graphDb.index().forNodes(USERS_INDEX);
 
-    List<User> connections = new ArrayList<User>();
+    Map <String, User> connections = new HashMap <String, User>();
 
     Node start = usersIndex.get(User.ID, userId).getSingle();
 
@@ -163,7 +163,7 @@ public class GraphDBDAOImpl implements GraphDBDAO {
        user.setFname((String) endNode.getProperty(User.FNAME));
        user.setLname((String) endNode.getProperty(User.LNAME));
 
-       connections.add(user);
+       connections.put((String) endNode.getProperty(User.ID), user);
     }
 
     return connections;
